@@ -1,0 +1,31 @@
+<ul>
+  <li *ngFor="let post of posts">
+    <div class="post">
+      <hr />
+      <div class="post__wrapper">
+        <div class="post__user">
+          <img src="./assets/img/user.jpg" class="post__user-picture" />
+          <div class="post__user-info">
+            <div class="post__author">{{ post.author }}</div>
+            <div class="post__date">{{ post.date | date: 'mediumDate' }}</div>
+          </div>
+        </div>
+
+        <div
+          class="post__user-like"
+          (click)="toggleLike()"
+          [ngClass]="toggle ? 'clicked' : 'unclicked'"
+        >
+          <img src="./assets/img/like.png" class="post__like" />
+          <p class="post__counter">{{ likeCounter }}</p>
+        </div>
+      </div>
+
+      <div class="post__title">{{ post.title }}</div>
+
+      <div class="post__content">{{ post.content }}</div>
+
+      <div class="post__expand">{{ mockedText }}</div>
+    </div>
+  </li>
+</ul>
