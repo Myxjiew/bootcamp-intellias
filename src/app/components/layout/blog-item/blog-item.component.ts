@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IPost } from 'src/interfaces/blog-item.interface';
+import { BlogService } from 'src/services/blog.service';
 
 @Component({
   selector: 'app-blog-item',
@@ -6,30 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blog-item.component.sass'],
 })
 export class BlogItemComponent implements OnInit {
-  constructor() {}
+  public constructor(private readonly blogService: BlogService) {}
 
-  toggle: boolean = false;
-  likeCounter: number = 0;
-  posts = [
-    {
-      author: 'John Dow',
-      date: new Date(),
-      title: 'NATURAL LANGUAGE INTERFACE ACCESSIBILITY',
-      content: 'Spoken interaction with mobile devices and consumer',
-    },
-    {
-      author: 'John Dow',
-      date: new Date(),
-      title: 'Accessibility of Remote Meetings',
-      content: 'The impact of COVID-19 has been a substantial increase',
-    },
-  ];
-  mockedText: string = 'Read more...';
+  public readonly mockedText = 'Read more...';
+  public posts: IPost[] = [];
 
-  toggleLike(): void {
-    this.toggle = !this.toggle;
-    this.likeCounter ? (this.likeCounter = 0) : (this.likeCounter = 1);
+  public handleClick(post: any): void {
+    post.toggle = !post.toggle;
+    post.likeCounter ? post.likeCounter = 0 : post.likeCounter = 1;
   }
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.blogService.receivePosts().subscribe(res => this.posts.push(res));
+    this.blogService.initPosts();
+  }
+
 }

@@ -13,11 +13,11 @@
 
         <div
           class="post__user-like"
-          (click)="toggleLike()"
-          [ngClass]="toggle ? 'clicked' : 'unclicked'"
+          [class.clicked]="post.toggle"
+          (click)="handleClick(post)"
         >
           <img src="./assets/img/like.png" class="post__like" />
-          <p class="post__counter">{{ likeCounter }}</p>
+          <p class="post__counter">{{ post.likeCounter }}</p>
         </div>
       </div>
 

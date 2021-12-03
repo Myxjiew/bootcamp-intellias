@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Add your post now!</h2>
+<form [formGroup] = 'modalForm'>
+  <div mat-dialog-content class="modal__wrapper-inputs">
+    <mat-form-field appearance="standard">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="author" />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Content</mat-label>
+      <textarea matInput formControlName="content"></textarea>
+    </mat-form-field>
+  </div>
+</form>
+
+<div mat-dialog-actions class="modal__buttons">
+  <button mat-button (click)="closeClick()">No Thanks</button>
+  <button mat-button (click)="sendNewPost()">Ok</button>
+</div>
