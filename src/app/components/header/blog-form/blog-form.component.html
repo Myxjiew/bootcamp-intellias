@@ -18,5 +18,8 @@
 
 <div mat-dialog-actions class="modal__buttons">
   <button mat-button (click)="closeClick()">No Thanks</button>
-  <button mat-button (click)="sendNewPost()">Ok</button>
+  <button mat-button 
+  [disabled]="!modalForm.valid"
+  (click)="sendNewPost()"
+  >Ok</button>
 </div>

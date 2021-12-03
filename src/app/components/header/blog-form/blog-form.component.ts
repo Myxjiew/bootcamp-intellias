@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IModal } from 'src/interfaces/modal.interface';
 import { BlogService } from 'src/services/blog.service';
-import { FormBuilder, Validators} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-blog-form',
@@ -11,9 +11,9 @@ import { FormBuilder, Validators} from '@angular/forms';
 })
 export class BlogFormComponent implements OnInit {
   modalForm = this.fb.group({
-    author: ['', Validators.required],
-    title: ['', Validators.required],
-    content: ['', Validators.required]
+    author: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-Z ]*')]],
+    title: ['', [Validators.required, Validators.minLength(6)]],
+    content: ['', [Validators.required, Validators.minLength(8)]],
   });
   constructor(
     private matDialogRef: MatDialogRef<BlogFormComponent>,
@@ -29,8 +29,7 @@ export class BlogFormComponent implements OnInit {
   }
 
   sendNewPost() {
-    this.blogService.publishPost({...this.modalForm.value, likeCounter: 0});
-    this.matDialogRef.afterClosed();
+    this.blogService.publishPost({ ...this.modalForm.value, likeCounter: 0 });
     this.matDialogRef.close();
   }
 }
