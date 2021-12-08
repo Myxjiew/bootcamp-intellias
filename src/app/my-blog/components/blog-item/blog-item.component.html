@@ -1,9 +1,8 @@
 <li>
   <div class="post">
-    <hr />
     <div class="post__wrapper">
       <div class="post__user">
-        <img src="./assets/img/user.jpg" class="post__user-picture" />
+        <mat-icon class="post__user-picture">mood</mat-icon>
         <div class="post__user-info">
           <div class="post__author">{{ post?.author }}</div>
           <div class="post__date">{{ post?.date | date: "mediumDate" }}</div>
@@ -15,7 +14,13 @@
         [class.clicked]="post?.toggle"
         (click)="handleClick(post)"
       >
-        <img src="./assets/img/like.png" class="post__like" />
+        <mat-icon *ngIf="!post?.toggle" [color]="'primary'">
+          favorite
+        </mat-icon>
+        <mat-icon *ngIf="post?.toggle" [color]="'accent'">
+          favorite_border
+        </mat-icon>
+
         <p class="post__counter">{{ post?.likeCounter }}</p>
       </div>
     </div>
