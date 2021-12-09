@@ -1,5 +1,5 @@
-<li>
-  <div class="post">
+<article>
+  <div *ngIf="post" class="post">
     <div class="post__wrapper">
       <div class="post__user">
         <mat-icon class="post__user-picture">mood</mat-icon>
@@ -31,4 +31,4 @@
 
     <div class="post__expand">{{ mockedText }}</div>
   </div>
-</li>
+</article>

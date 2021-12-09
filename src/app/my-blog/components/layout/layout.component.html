@@ -1,11 +1,5 @@
 <main class="layout">
-  <div class="layout__blog-list">
-    <ul>
-      <ng-container *ngFor="let post of posts">
-        <app-blog-item [post]="post"></app-blog-item>
-      </ng-container>
-    </ul>
-  </div>
+  <app-post-list class="layout__blog-list"></app-post-list>
   <div class="layout__aside">
     <app-aside-tags></app-aside-tags>
   </div>

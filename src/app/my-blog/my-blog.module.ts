@@ -6,9 +6,15 @@ import { AsideTagsComponent } from './components/aside-tags/aside-tags.component
 import { BlogItemComponent } from './components/blog-item/blog-item.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { MatIconModule } from '@angular/material/icon';
+import { PostListComponent } from './components/post-list/post-list.component';
 
 @NgModule({
-  declarations: [AsideTagsComponent, BlogItemComponent, LayoutComponent],
+  declarations: [
+    AsideTagsComponent,
+    BlogItemComponent,
+    LayoutComponent,
+    PostListComponent,
+  ],
   imports: [CommonModule, FormsModule, BlogHandlerModule, MatIconModule],
   exports: [LayoutComponent],
   bootstrap: [],
