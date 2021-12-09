@@ -1,0 +1,34 @@
+<article>
+  <div *ngIf="post" class="post">
+    <div class="post__wrapper">
+      <div class="post__user">
+        <mat-icon class="post__user-picture">mood</mat-icon>
+        <div class="post__user-info">
+          <div class="post__author">{{ post?.author }}</div>
+          <div class="post__date">{{ post?.date | date: "mediumDate" }}</div>
+        </div>
+      </div>
+
+      <div
+        class="post__user-like"
+        [class.clicked]="post?.toggle"
+        (click)="handleClick(post)"
+      >
+        <mat-icon *ngIf="!post?.toggle" [color]="'primary'">
+          favorite
+        </mat-icon>
+        <mat-icon *ngIf="post?.toggle" [color]="'accent'">
+          favorite_border
+        </mat-icon>
+
+        <p class="post__counter">{{ post?.likeCounter }}</p>
+      </div>
+    </div>
+
+    <div class="post__title">{{ post?.title }}</div>
+
+    <div class="post__content">{{ post?.content }}</div>
+
+    <div class="post__expand">{{ mockedText }}</div>
+  </div>
+</article>
