@@ -6,6 +6,7 @@ import { AsideTagsComponent } from './components/aside-tags/aside-tags.component
 import { BlogItemComponent } from './components/blog-item/blog-item.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRippleModule } from '@angular/material/core';
 import { PostListComponent } from './components/post-list/post-list.component';
 
 @NgModule({
@@ -15,7 +16,13 @@ import { PostListComponent } from './components/post-list/post-list.component';
     LayoutComponent,
     PostListComponent,
   ],
-  imports: [CommonModule, FormsModule, BlogHandlerModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    BlogHandlerModule,
+    MatIconModule,
+    MatRippleModule,
+  ],
   exports: [LayoutComponent],
   bootstrap: [],
 })
