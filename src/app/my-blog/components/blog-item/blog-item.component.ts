@@ -5,9 +5,12 @@ import { IPost } from '@shared/interfaces/blog-item.interface';
   selector: 'app-blog-item',
   templateUrl: './blog-item.component.html',
   styleUrls: ['./blog-item.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogItemComponent {
+  radius = 15;
+  color = '#7ba05380';
+
   @Input() public post!: IPost;
 
   public readonly mockedText = 'Read more...';
@@ -17,8 +20,7 @@ export class BlogItemComponent {
     if (post.toggle) {
       post.likeCounter++;
     } else if (!post.toggle && post.likeCounter > 0) {
-      post.likeCounter--
+      post.likeCounter--;
     }
   }
-
 }
