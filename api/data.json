@@ -1,7 +1,7 @@
 [
   {
     "author": "John Dow",
-    "date": "eval(new Date().toISOString)",
+    "date": "Fri Dec 17 2021",
     "title": "NATURAL LANGUAGE INTERFACE ACCESSIBILITY",
     "content": "Spoken interaction with mobile devices and consumer",
     "toggle": false,
@@ -9,7 +9,7 @@
   },
   {
     "author": "John Dow",
-    "date": "eval(new Date().toISOString)",
+    "date": "Fri Dec 17 2021",
     "title": "Accessibility of Remote Meetings",
     "content": "The impact of COVID-19 has been a substantial increase",
     "toggle": false,
