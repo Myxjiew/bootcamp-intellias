@@ -1,8 +1,20 @@
 const { Post } = require("../models/post.js");
 const { Comment } = require("../models/comment.js");
+const { User } = require("../models/user.js");
 
 async function getAllPosts() {
-  return Post.find({});
+  let posts = await Post.find({}).lean();
+  const userIds = posts.map((el) => el.author);
+  const users = await User.find({ _id: { $in: userIds } }).lean();
+  posts = posts.map((el) => {
+    const user = users.find((item) => item._id.valueOf() === el.author);
+    if (user) {
+      return { ...el, firstName: user.firstName, lastName: user.lastName };
+    } else {
+      return el;
+    }
+  });
+  return posts;
 }
 
 async function addPosts(data) {

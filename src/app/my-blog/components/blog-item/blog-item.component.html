@@ -5,7 +5,7 @@
       <div class="post__user">
         <mat-icon class="post__user-picture">mood</mat-icon>
         <div class="post__user-info">
-          <div class="post__author">{{ post?.author }}</div>
+          <div class="post__author">{{ post?.firstName }} {{ post?.lastName }}</div>
           <div class="post__date">{{ post?.date | date: "mediumDate" }}</div>
         </div>
       </div>
@@ -17,7 +17,7 @@
            [class.clicked]="post?.toggle"
            (click)="handleClick(post)">
         <mat-icon [color]="post?.toggle ? 'accent' : 'warn'">favorite</mat-icon>
-        <p class="post__counter">{{ post?.likeCounter }}</p>
+        <p class="post__counter">{{ post?.likes }}</p>
       </div>
     </div>
 

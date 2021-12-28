@@ -1,8 +1,9 @@
 export interface IPost {
-    author: string;
-    date: Date;
-    title: string;
-    content: string;
-    toggle: boolean;
-    likeCounter: number;
-};
+  firstName: string;
+  lastName: string;
+  date: Date;
+  title: string;
+  content: string;
+  toggle: boolean;
+  likes: number;
+}
