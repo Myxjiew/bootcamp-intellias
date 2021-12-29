@@ -1,24 +1,36 @@
 const { Tag } = require("../models/tag.js");
 
 async function getAllTags() {
-  return Tag.find({});
+  try {
+    return Tag.find({});
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function addTag(data) {
-  const tag = new Tag({
-    tagName: data.tagName,
-    post: [],
-  });
-  return {
-    status: 200,
-  };
+  try {
+    const tag = new Tag({
+      tagName: data.tagName,
+      post: [],
+    });
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function removeTag(id) {
-  await Tag.remove({ _id: Tag._id });
-  return {
-    status: 200,
-  };
+  try {
+    await Tag.remove({ _id: Tag._id });
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = {

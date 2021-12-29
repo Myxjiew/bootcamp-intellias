@@ -2,45 +2,80 @@ const { Post } = require("../models/post.js");
 const { Comment } = require("../models/comment.js");
 const { User } = require("../models/user.js");
 
-async function getAllPosts() {
-  let posts = await Post.find({}).lean();
-  const userIds = posts.map((el) => el.author);
-  const users = await User.find({ _id: { $in: userIds } }).lean();
-  posts = posts.map((el) => {
-    const user = users.find((item) => item._id.valueOf() === el.author);
-    if (user) {
-      return { ...el, firstName: user.firstName, lastName: user.lastName };
-    } else {
-      return el;
+async function getPosts() {
+  try {
+    const posts = await Post.find({}).lean();
+    const userIds = posts.map((el) => el.author);
+    const users = await User.find({ _id: { $in: userIds } }).lean();
+    const result = posts.map((el) => {
+      const user = users.find((item) => item._id.valueOf() === el.author);
+      if (user) {
+        return { ...el, firstName: user.firstName, lastName: user.lastName };
+      } else {
+        return el;
+      }
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getPost(id) {
+  try {
+    const post = await Post.findOne({ _id: id }).lean();
+    if (post) {
+      const user = await User.findOne({ _id: post.author });
+      if (user) {
+        return {
+          ...post,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        };
+      }
     }
-  });
-  return posts;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function addPosts(data) {
-  await Post.create(data);
-  return {
-    status: 200,
-  };
+  try {
+    await Post.create(data);
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function removePost(id) {
-  await Post.remove({ _id: id });
-  await Comment.find({ post: id }).remove({});
-  return {
-    status: 200,
-  };
+  try {
+    await Post.remove({ _id: id });
+    await Comment.find({ post: id }).remove({});
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function updatePost(id, data) {
-  await Post.findByIdAndUpdate(id, data);
-  return {
-    status: 200,
-  };
+  try {
+    await Post.findOneAndUpdate(id, data);
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = {
-  getAllPosts,
+  getPosts,
+  getPost,
   addPosts,
   removePost,
   updatePost,

@@ -7,19 +7,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Custom
 import { HeaderModule } from '@shared/components/header/header.module';
 import { MyBlogModule } from '@my-blog/my-blog.module';
+import { PostPageModule } from '@my-blog/post-page/post-page.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HeaderModule,
-    MyBlogModule
+    MyBlogModule,
+    PostPageModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

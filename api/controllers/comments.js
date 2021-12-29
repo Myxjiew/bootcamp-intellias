@@ -7,45 +7,57 @@ async function getAllComments() {
 }
 
 async function addComment(data) {
-  const comment = new Comment({
-    author: new mongoose.Types.ObjectId(data.userId),
-    post: new mongoose.Types.ObjectId(data.postId),
-    text: data.text,
-  });
+  try {
+    const comment = new Comment({
+      author: new mongoose.Types.ObjectId(data.userId),
+      post: new mongoose.Types.ObjectId(data.postId),
+      text: data.text,
+    });
 
-  await Post.updateOne(
-    { _id: comment.post },
-    { $push: { comments: comment._id } }
-  );
+    await Post.updateOne(
+      { _id: comment.post },
+      { $push: { comments: comment._id } }
+    );
 
-  return {
-    status: 200,
-  };
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function updateComment(id, data) {
-  await Comment.findByIdAndUpdate(id, data);
+  try {
+    await Comment.findOneAndUpdate(id, data);
 
-  return {
-    status: 200,
-  };
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function removeComment(id) {
-  const comment = await Comment.findById({
-    _id: new mongoose.Types.ObjectId(id),
-  });
+  try {
+    const comment = await Comment.findById({
+      _id: new mongoose.Types.ObjectId(id),
+    });
 
-  await Post.updateOne(
-    { _id: comment.post },
-    { $pull: { comments: comment._id } }
-  );
+    await Post.updateOne(
+      { _id: comment.post },
+      { $pull: { comments: comment._id } }
+    );
 
-  await Comment.remove({ _id: comment._id });
+    await Comment.remove({ _id: comment._id });
 
-  return {
-    status: 200,
-  };
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = {

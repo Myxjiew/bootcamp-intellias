@@ -11,11 +11,18 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class BlogFormComponent {
   modalForm = this.fb.group({
-    author: ['', [Validators.required, Validators.minLength(2), Validators.pattern('[a-zA-Z ]*')]],
+    author: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.pattern('[a-zA-Z ]*'),
+      ],
+    ],
     title: ['', [Validators.required, Validators.minLength(6)]],
     content: ['', [Validators.required, Validators.minLength(8)]],
   });
-  
+
   constructor(
     private matDialogRef: MatDialogRef<BlogFormComponent>,
     private blogService: BlogService,
@@ -28,7 +35,15 @@ export class BlogFormComponent {
   }
 
   sendNewPost() {
-    this.blogService.publishPost({ ...this.modalForm.value, likeCounter: 0 });
+    this.blogService
+      .sendPost(
+        Object.assign(this.modalForm.value, {
+          author: '61cb086fcd5ea4403ed5fd19',
+          date: new Date(),
+          likes: 0,
+        })
+      )
+      .subscribe((data) => this.blogService.publishPost(data));
     this.matDialogRef.close();
   }
 }

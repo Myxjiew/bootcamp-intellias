@@ -2,14 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getAllPosts,
+  getPosts,
+  getPost,
   addPosts,
   removePost,
   updatePost,
 } = require("../controllers/posts.js");
 
 router.get("/", async (req, res) => {
-  res.send(await getAllPosts());
+  res.send(await getPosts());
+});
+router.get("/:id", async (req, res) => {
+  res.send(await getPost(req.params.id));
 });
 router.post("/", async (req, res) => {
   res.send(await addPosts(req.body));

@@ -25,6 +25,7 @@
 
     <div class="post__content">{{ post?.content }}</div>
 
-    <div class="post__expand">{{ mockedText }}</div>
+    <div class="post__expand"
+         [routerLink]="['posts', post._id]">{{ mockedText }}</div>
   </div>
 </article>

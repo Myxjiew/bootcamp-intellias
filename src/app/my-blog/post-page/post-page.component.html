@@ -1,0 +1,22 @@
+<article class="post">
+    <div class="post__wrapper">
+        <div class="post__user">
+            <mat-icon class="post__user-picture">mood</mat-icon>
+            <div class="post__author-info">
+                <div class="post__author">{{ post?.firstName }} {{ post?.lastName }}</div>
+                <div class="post__date">{{ post?.date | date: "mediumDate" }}</div>
+            </div>
+        </div>
+        <div class="post__user-like"
+             matRipple
+             [matRippleRadius]="radius"
+             [matRippleColor]="color"
+             [class.clicked]="post?.toggle"
+             (click)="handleClick(post)">
+            <mat-icon [color]="post?.toggle ? 'accent' : 'warn'">favorite</mat-icon>
+            <p class="post__counter">{{ post?.likes }}</p>
+        </div>
+    </div>
+    <div class="post__title">{{ post?.title }}</div>
+    <div class="post__content">{{ post?.content }}</div>
+</article>

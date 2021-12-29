@@ -8,6 +8,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { PostListComponent } from './components/post-list/post-list.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PostListComponent } from './components/post-list/post-list.component';
     BlogHandlerModule,
     MatIconModule,
     MatRippleModule,
+    RouterModule,
   ],
   exports: [LayoutComponent],
   bootstrap: [],
