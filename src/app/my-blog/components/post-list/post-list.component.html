@@ -1,5 +1,22 @@
 <div class="layout__blog-list">
-  <section>
-    <app-blog-item *ngFor="let post of posts" [post]="post"></app-blog-item>
+  <div *ngIf="!toggle"
+       class="container">
+    <div class="row">
+      <div id="loader">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="loading"></div>
+      </div>
+    </div>
+  </div>
+  <section *ngIf="toggle">
+    <app-blog-item *ngFor="let post of posts"
+                   [post]="post"></app-blog-item>
   </section>
 </div>
