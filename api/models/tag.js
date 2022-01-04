@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const likeSchema = Schema(
+const tagSchema = Schema(
   {
     tagName: {
       type: String,
       required: true,
+      unique: true,
     },
-
-    post: [
+    posts: [
       {
         type: Schema.Types.ObjectId,
         ref: "Post",
@@ -21,4 +21,4 @@ const likeSchema = Schema(
   }
 );
 
-module.exports.Tag = mongoose.model("Tag", likeSchema);
+module.exports.Tag = mongoose.model("Tag", tagSchema);

@@ -9,19 +9,23 @@ const {
 } = require("../controllers/comments.js");
 
 router.get("/", async (req, res) => {
-  res.send(await getAllComments());
+  const result = await getAllComments();
+  res.send(result);
 });
 
 router.post("/", async (req, res) => {
-  res.send(await addComment(req.body));
+  const result = await addComment(req.body);
+  res.send(result);
 });
 
 router.patch("/:id", async (req, res) => {
-  res.send(await updateComment(req.params.id, req.body));
+  const result = await updateComment(req.params.id, req.body);
+  res.send(result);
 });
 
 router.delete("/:id", async (req, res) => {
-  res.send(await removeComment(req.params.id));
+  const result = await removeComment(req.params.id);
+  res.send(result);
 });
 
 module.exports = router;

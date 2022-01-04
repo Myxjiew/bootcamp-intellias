@@ -7,20 +7,17 @@ const commentSchema = Schema(
       type: String,
       required: true,
     },
-    author: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-    ],
-    post: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Post",
-        required: true,
-      },
-    ],
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    post: {
+      type: Schema.Types.ObjectId,
+      ref: "Post",
+      required: true,
+    },
   },
   {
     versionKey: false,

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 
 async function connect() {
   try {
-    const connection = await mongoose.connect(
-      "mongodb+srv://admin:admin@bci-mongodb.ru25h.mongodb.net/BCI-MongoDB?retryWrites=true&w=majority"
-    );
+    const connection = await mongoose.connect(process.env.DB_URI);
     console.log("Connected!");
     return connection;
   } catch (error) {
