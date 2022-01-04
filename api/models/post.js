@@ -43,7 +43,6 @@ const postSchema = Schema(
       {
         type: String,
         required: true,
-        unique: true,
       },
     ],
   },
