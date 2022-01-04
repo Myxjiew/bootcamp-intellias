@@ -1,21 +1,29 @@
 const express = require("express");
 const path = require("path");
+const parser = require("body-parser");
 const app = express();
 const port = 3333;
 const router = require("./api/routes/router.js");
+const connect = require("./api/db_connection.js");
 
-app.use(express.static("dist/bootcamp-intellias"));
+(async function init() {
+  app.use(express.static("dist/bootcamp-intellias"));
 
-app.use("/api", router);
+  app.use(parser.json());
 
-app.all("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./dist/bootcamp-intellias/index.html"));
-});
+  app.use("/api", router);
 
-app.use((err, req, res) => {
-  res.status(500).send(`Error occured: ${err.message}`);
-});
+  app.all("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./dist/bootcamp-intellias/index.html"));
+  });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+  app.use((err, req, res) => {
+    res.status(500).send(`Error occured: ${err.message}`);
+  });
+
+  const connection = await connect();
+
+  app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+  });
+})();
