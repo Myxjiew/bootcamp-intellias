@@ -5,7 +5,7 @@ async function getAllPosts() {
   return Post.find({});
 }
 
-async function addPosts(data) {
+async function addPost(data) {
   await Post.create(data);
   return {
     status: 200,
@@ -29,7 +29,7 @@ async function updatePost(id, data) {
 
 module.exports = {
   getAllPosts,
-  addPosts,
+  addPost,
   removePost,
   updatePost,
 };

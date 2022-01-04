@@ -7,7 +7,7 @@ async function getAllTags() {
 async function addTag(data) {
   const tag = new Tag({
     tagName: data.tagName,
-    post: [],
+    posts: req.body.posts || [],
   });
   return {
     status: 200,

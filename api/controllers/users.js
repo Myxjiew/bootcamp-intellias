@@ -1,5 +1,7 @@
 const { User } = require("../models/user.js");
 const { Comment } = require("../models/comment.js");
+const mongoose = require("mongoose");
+const session = await mongoose.startSession();
 
 async function getAllUsers() {
   return User.find({});
@@ -20,8 +22,11 @@ async function updateUser(id, dataUser) {
 }
 
 async function removeUser(id) {
-  await User.remove({ _id: id });
-  await Comment.find({ post: id }).remove({});
+  await session.withTransaction(async () => {
+    await User.remove({ _id: id });
+    await Comment.find({ post: id }).remove({});
+  });
+  await session.abortTransaction();
   return {
     status: 200,
   };

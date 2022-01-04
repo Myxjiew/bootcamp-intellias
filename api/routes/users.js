@@ -9,16 +9,20 @@ const {
 } = require("../controllers/users.js");
 
 router.get("/", async (req, res) => {
-  res.send(await getAllUsers());
+  const result = await getAllUsers();
+  res.send(result);
 });
 router.post("/", async (req, res) => {
-  res.send(await addUser(req.body));
+  const result = await addUser(req.body);
+  res.send(result);
 });
 router.patch("/:id", async (req, res) => {
-  res.send(await updateUser(req.params.id, req.body));
+  const result = await updateUser(req.params.id, req.body);
+  res.send(result);
 });
 router.delete("/:id", async (req, res) => {
-  res.send(await removeUser(req.params.id));
+  const result = await removeUser(req.params.id);
+  res.send(result);
 });
 
 module.exports = router;

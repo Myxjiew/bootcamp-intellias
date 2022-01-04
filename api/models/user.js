@@ -18,9 +18,24 @@ const userSchema = Schema({
     type: String,
     required: true,
   },
-  favorites: {
-    type: [String],
-  },
+  likedComments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
+  likedPosts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
 });
 
 module.exports.User = mongoose.model("User", userSchema);
