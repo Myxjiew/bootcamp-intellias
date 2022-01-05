@@ -5,7 +5,7 @@ import { RADIUS, COLOR } from 'src/app/constants/post.constants';
 @Component({
   selector: 'app-blog-item',
   templateUrl: './blog-item.component.html',
-  styleUrls: ['./blog-item.component.sass'],
+  styleUrls: ['./blog-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogItemComponent {

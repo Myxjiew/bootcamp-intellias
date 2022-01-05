@@ -1,0 +1,9 @@
+@import "../../../../styles/variables";
+.aside {
+  background: $grey;
+  padding: 8px;
+
+  &__label {
+    margin-bottom: 12px;
+  }
+}

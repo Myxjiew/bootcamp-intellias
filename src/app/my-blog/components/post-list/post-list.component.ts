@@ -6,7 +6,7 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.sass'],
+  styleUrls: ['./post-list.component.scss'],
 })
 export class PostListComponent implements OnInit, OnDestroy {
   public posts: IPost[] = [];

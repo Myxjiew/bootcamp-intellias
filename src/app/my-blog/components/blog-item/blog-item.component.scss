@@ -1,0 +1,78 @@
+@import "../../../../styles/variables";
+
+.post {
+  margin: 0px 8px 8px 8px;
+  padding: 16px 2px 2px 2px;
+  border-top: 1px solid $border-grey;
+
+  &__user {
+    display: flex;
+    align-items: center;
+  }
+
+  &__user-picture {
+    font-size: 48px;
+    width: 58px;
+    height: 58px;
+  }
+
+  &__author {
+    color: $main;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  &__date {
+    color: $date-grey;
+  }
+
+  &__title {
+    padding: 8px 0;
+    font-size: 28px;
+  }
+
+  &__content {
+    padding: 8px 0;
+    margin-top: 8px;
+    font-size: 22px;
+    color: $content-grey;
+  }
+
+  &__expand {
+    margin-top: 16px;
+    color: $date-grey;
+    cursor: pointer;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 24px;
+  }
+
+  &__user-like {
+    display: flex;
+    align-items: center;
+    border: 1px solid $main;
+    border-radius: 10%;
+    padding: 4px;
+    width: 36px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  &__counter {
+    color: $main;
+    padding-left: 2px;
+    margin: 0;
+  }
+}
+
+.clicked {
+  background-color: $main;
+
+  p {
+    color: $white;
+  }
+}

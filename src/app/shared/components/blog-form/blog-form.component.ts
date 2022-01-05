@@ -7,7 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-blog-form',
   templateUrl: './blog-form.component.html',
-  styleUrls: ['./blog-form.component.sass'],
+  styleUrls: ['./blog-form.component.scss'],
 })
 export class BlogFormComponent {
   modalForm = this.fb.group({
