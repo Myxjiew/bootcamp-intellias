@@ -28,19 +28,7 @@ const userSchema = Schema(
     likedPosts: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Comment",
-      },
-    ],
-    likedComments: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Comment",
-      },
-    ],
-    likedPosts: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Comment",
+        ref: "Post",
       },
     ],
     comments: [
