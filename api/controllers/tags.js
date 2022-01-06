@@ -12,7 +12,7 @@ async function addTag(data) {
   try {
     const tag = new Tag({
       tagName: data.tagName,
-      post: [],
+      post: req.body.posts || [],
     });
     return {
       status: 200,
