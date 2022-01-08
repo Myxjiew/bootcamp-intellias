@@ -21,11 +21,7 @@ export class BlogItemComponent {
 
   public handleClick(post: IPost): void {
     post.toggle = !post.toggle;
-    if (post.toggle) {
-      post.likes++;
-    } else if (!post.toggle && post.likes > 0) {
-      post.likes--;
-    }
+    post.toggle ? post.likes++ : post.likes--;
   }
 
   public deleteCurrentPost(): void {
