@@ -10,6 +10,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { RouterModule } from '@angular/router';
 import { SpinnerModule } from '@shared/components/spinner/spinner.module';
+import { TagComponent } from './components/tag/tag.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SpinnerModule } from '@shared/components/spinner/spinner.module';
     BlogItemComponent,
     LayoutComponent,
     PostListComponent,
+    TagComponent,
   ],
   imports: [
     CommonModule,
