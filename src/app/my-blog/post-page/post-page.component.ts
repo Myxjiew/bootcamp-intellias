@@ -13,6 +13,7 @@ export class PostPageComponent implements OnInit {
   public post!: IPost;
   public radius = RADIUS;
   public color = COLOR;
+  public toggle = false;
 
   constructor(
     private readonly blogService: BlogService,
@@ -22,14 +23,14 @@ export class PostPageComponent implements OnInit {
 
   public handleClick(post: IPost): void {
     post.toggle = !post.toggle;
-    if (post.toggle) {
-      post.likes++;
-    } else if (!post.toggle && post.likes > 0) {
-      post.likes--;
-    }
+    post.toggle ? post.likes++ : post.likes--;
   }
 
   public ngOnInit(): void {
+    setTimeout(() => {
+      this.toggle = true;
+    }, 1000);
+
     const id = this.route.snapshot.paramMap.get('id') || '';
     this.blogService.receivePost(id).subscribe((post) => {
       if (!post) {
