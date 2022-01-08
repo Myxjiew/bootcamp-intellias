@@ -1,8 +1,8 @@
 @import "../../../../styles/variables";
 
 .post {
-  margin: 0px 8px 8px 8px;
-  padding: 16px 2px 2px 2px;
+  margin: 0px 8px 8px;
+  padding: 16px 2px 2px;
   border-top: 1px solid $border-grey;
 
   &__user {
@@ -38,6 +38,11 @@
     color: $content-grey;
   }
 
+  &__bottom-bar {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__expand {
     margin-top: 16px;
     color: $date-grey;
@@ -51,14 +56,30 @@
     margin-right: 24px;
   }
 
+  &__tools {
+    display: flex;
+
+    &-button {
+      display: flex;
+      align-items: center;
+      border: 1px solid $main;
+      border-radius: 100%;
+      padding: 4px;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      margin-right: 12px;
+    }
+  }
+
   &__user-like {
     display: flex;
     align-items: center;
     border: 1px solid $main;
-    border-radius: 10%;
+    border-radius: 100%;
     padding: 4px;
     width: 36px;
-    height: 24px;
+    height: 36px;
     cursor: pointer;
   }
 

@@ -1,19 +1,7 @@
 <div class="layout__blog-list">
   <div *ngIf="!toggle"
        class="container">
-    <div class="row">
-      <div id="loader">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="loading"></div>
-      </div>
-    </div>
+    <app-spinner></app-spinner>
   </div>
   <section *ngIf="toggle">
     <app-blog-item *ngFor="let post of posts"

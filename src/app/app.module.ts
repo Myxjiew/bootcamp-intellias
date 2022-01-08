@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from '@shared/components/header/header.module';
 import { MyBlogModule } from '@my-blog/my-blog.module';
 import { PostPageModule } from '@my-blog/post-page/post-page.module';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

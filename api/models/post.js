@@ -4,8 +4,7 @@ const { Schema } = mongoose;
 const postSchema = Schema(
   {
     author: {
-      ref: "User",
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true,
     },
 
@@ -24,13 +23,9 @@ const postSchema = Schema(
       required: true,
     },
 
-    likes: [
-      {
-        ref: "User",
-        type: Schema.Types.ObjectId,
-        required: true,
-      },
-    ],
+    likes: {
+      type: Number,
+    },
 
     comments: [
       {

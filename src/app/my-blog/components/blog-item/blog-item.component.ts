@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IPost } from '@shared/interfaces/blog-item.interface';
+import { BlogService } from '@shared/services/blog.service';
 import { RADIUS, COLOR } from 'src/app/constants/post.constants';
 
 @Component({
@@ -11,6 +12,8 @@ import { RADIUS, COLOR } from 'src/app/constants/post.constants';
 export class BlogItemComponent {
   @Input() public post!: IPost;
 
+  constructor(private blogService: BlogService) {}
+
   public radius = RADIUS;
   public color = COLOR;
 
@@ -18,10 +21,13 @@ export class BlogItemComponent {
 
   public handleClick(post: IPost): void {
     post.toggle = !post.toggle;
-    if (post.toggle) {
-      post.likes++;
-    } else if (!post.toggle && post.likes > 0) {
-      post.likes--;
-    }
+    post.toggle ? post.likes++ : post.likes--;
+  }
+
+  public deleteCurrentPost(): void {
+    this.blogService
+      .deletePost(this.post._id)
+      .subscribe((data) => this.blogService.publishPost(data));
+    window.location.reload();
   }
 }

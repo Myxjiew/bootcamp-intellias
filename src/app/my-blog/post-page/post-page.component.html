@@ -1,4 +1,5 @@
-<article class="post">
+<article class="post"
+         *ngIf="toggle">
     <div class="post__wrapper">
         <div class="post__user">
             <mat-icon class="post__user-picture">mood</mat-icon>
@@ -20,3 +21,7 @@
     <div class="post__title">{{ post?.title }}</div>
     <div class="post__content">{{ post?.content }}</div>
 </article>
+<div *ngIf="!toggle"
+     class="container">
+    <app-spinner></app-spinner>
+</div>

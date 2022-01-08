@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IModal } from '@shared/interfaces/modal.interface';
-import { BlogService } from '../../services/blog.service';
+import { BlogService } from '@shared/services/blog.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -11,14 +11,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class BlogFormComponent {
   modalForm = this.fb.group({
-    author: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.pattern('[a-zA-Z ]*'),
-      ],
-    ],
     title: ['', [Validators.required, Validators.minLength(6)]],
     content: ['', [Validators.required, Validators.minLength(8)]],
   });
@@ -30,11 +22,11 @@ export class BlogFormComponent {
     @Inject(MAT_DIALOG_DATA) public data: IModal
   ) {}
 
-  closeClick() {
+  public closeClick() {
     this.matDialogRef.close();
   }
 
-  sendNewPost() {
+  public sendNewPost() {
     this.blogService
       .sendPost(
         Object.assign(this.modalForm.value, {
@@ -45,5 +37,6 @@ export class BlogFormComponent {
       )
       .subscribe((data) => this.blogService.publishPost(data));
     this.matDialogRef.close();
+    window.location.reload();
   }
 }

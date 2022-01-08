@@ -39,7 +39,7 @@ async function getPost(id) {
   }
 }
 
-async function addPosts(data) {
+async function addPost(data) {
   try {
     await Post.create(data);
     return {
@@ -52,8 +52,8 @@ async function addPosts(data) {
 
 async function removePost(id) {
   try {
-    await Post.remove({ _id: id });
-    await Comment.find({ post: id }).remove({});
+    await Post.deleteOne({ _id: id });
+    await Comment.find({ post: id }).deleteOne({});
     return {
       status: 200,
     };
@@ -76,7 +76,7 @@ async function updatePost(id, data) {
 module.exports = {
   getPosts,
   getPost,
-  addPosts,
+  addPost,
   removePost,
   updatePost,
 };
