@@ -2,14 +2,20 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getAllComments,
+  getComments,
+  getComment,
   addComment,
   removeComment,
   updateComment,
 } = require("../controllers/comments.js");
 
 router.get("/", async (req, res) => {
-  const result = await getAllComments();
+  const result = await getComments();
+  res.send(result);
+});
+
+router.get("/:id", async (req, res) => {
+  const result = await getComment(req.params.id);
   res.send(result);
 });
 

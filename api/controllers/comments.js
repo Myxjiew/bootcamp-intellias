@@ -2,8 +2,20 @@ const mongoose = require("mongoose");
 const { Post } = require("../models/post.js");
 const { Comment } = require("../models/comment.js");
 
-async function getAllComments() {
-  return Comment.find({});
+async function getComments() {
+  try {
+    return Comment.find({});
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getComment(id) {
+  try {
+    return Comment.findOne({ _id: id });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function addComment(data) {
@@ -41,7 +53,7 @@ async function updateComment(id, data) {
 
 async function removeComment(id) {
   try {
-    const comment = await Comment.findById({
+    const comment = await Comment.findOne({
       _id: new mongoose.Types.ObjectId(id),
     });
 
@@ -50,7 +62,7 @@ async function removeComment(id) {
       { $pull: { comments: comment._id } }
     );
 
-    await Comment.remove({ _id: comment._id });
+    await Comment.deleteOne({ _id: comment._id });
 
     return {
       status: 200,
@@ -61,7 +73,8 @@ async function removeComment(id) {
 }
 
 module.exports = {
-  getAllComments,
+  getComments,
+  getComment,
   addComment,
   updateComment,
   removeComment,

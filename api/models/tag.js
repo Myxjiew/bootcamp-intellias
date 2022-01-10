@@ -9,7 +9,7 @@ const tagSchema = Schema(
     },
     posts: [
       {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Post",
         required: true,
       },

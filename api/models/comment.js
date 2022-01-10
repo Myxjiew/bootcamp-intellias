@@ -8,13 +8,13 @@ const commentSchema = Schema(
       required: true,
     },
     author: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "User",
       required: true,
     },
 
     post: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "Post",
       required: true,
     },

@@ -3,9 +3,17 @@ const { Comment } = require("../models/comment.js");
 const mongoose = require("mongoose");
 const session = mongoose.startSession();
 
-async function getAllUsers() {
+async function getUsers() {
   try {
     return User.find({});
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getUser(id) {
+  try {
+    return User.findOne({ _id: id });
   } catch (error) {
     console.log(error);
   }
@@ -36,8 +44,8 @@ async function updateUser(id, dataUser) {
 async function removeUser(id) {
   try {
     await session.withTransaction(async () => {
-      await User.remove({ _id: id });
-      await Comment.find({ post: id }).remove({});
+      await User.deleteOne({ _id: id });
+      await Comment.find({ post: id }).deleteOne({});
     });
     await session.abortTransaction();
     return {
@@ -49,7 +57,8 @@ async function removeUser(id) {
 }
 
 module.exports = {
-  getAllUsers,
+  getUsers,
+  getUser,
   addUser,
   updateUser,
   removeUser,

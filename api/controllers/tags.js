@@ -1,8 +1,16 @@
 const { Tag } = require("../models/tag.js");
 
-async function getAllTags() {
+async function getTags() {
   try {
     return Tag.find({});
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getTag(id) {
+  try {
+    return Tag.find({ _id: id });
   } catch (error) {
     console.log(error);
   }
@@ -22,9 +30,20 @@ async function addTag(data) {
   }
 }
 
+async function updateTag(id, data) {
+  try {
+    await Tag.findOneAndUpdate(id, data);
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function removeTag(id) {
   try {
-    await Tag.remove({ _id: Tag._id });
+    await Tag.deleteOne({ _id: id });
     return {
       status: 200,
     };
@@ -34,7 +53,9 @@ async function removeTag(id) {
 }
 
 module.exports = {
-  getAllTags,
+  getTags,
+  getTag,
   addTag,
+  updateTag,
   removeTag,
 };
