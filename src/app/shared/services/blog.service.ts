@@ -1,38 +1,55 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IPost } from '@shared/interfaces/blog-item.interface';
+import { Post } from '@shared/interfaces/blog-item.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-const postsMock: IPost[] = [];
+const postsMock: Post[] = [];
 
 @Injectable({
   providedIn: 'root',
 })
 export class BlogService {
-  private postStream = new BehaviorSubject<IPost[]>(postsMock);
+  private postStream = new BehaviorSubject<Post[]>(postsMock);
   constructor(private readonly http: HttpClient) {}
 
-  public receivePosts(): Observable<IPost[]> {
-    return this.http.get<IPost[]>('/api/posts');
+  public receivePosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('/api/posts');
   }
 
-  public receivePost(id: string): Observable<IPost> {
-    return this.http.get<IPost>(`/api/posts/${id}`);
+  public receivePost(id: string): Observable<Post> {
+    return this.http.get<Post>(`/api/posts/${id}`);
   }
 
-  public sendPost(post: IPost) {
-    return this.http.post<IPost>('/api/posts', post);
+  public sendPost(post: Post) {
+    return this.http.post<Post>('/api/posts', post);
   }
 
-  public updatePost(id: string, post: IPost): Observable<IPost> {
-    return this.http.patch<IPost>(`/api/posts/${id}`, post);
+  public updatePost(id: string, post: Post): Observable<Post> {
+    return this.http.patch<Post>(`/api/posts/${id}`, post);
   }
 
-  public deletePost(id: string): Observable<IPost> {
-    return this.http.delete<IPost>(`/api/posts/${id}`);
+  public deletePost(id: string): Observable<{ _id: string }> {
+    return this.http.delete<{ _id: string }>(`/api/posts/${id}`);
   }
 
-  public publishPost(post: IPost): void {
-    this.postStream.next([...this.postStream.getValue(), post]);
+  public updateStream(post: Post, action: 'add' | 'remove'): void {
+    if (post) {
+      if (action === 'remove') {
+        this.postStream.next(
+          this.postStream.getValue().filter((el) => el._id !== post._id)
+        );
+      } else {
+        this.postStream.next([...this.postStream.getValue(), post]);
+        console.log(this.postStream.getValue());
+      }
+    }
+  }
+
+  public getPosts(): Observable<Post[]> {
+    return this.postStream.asObservable();
+  }
+
+  public feedPosts(): void {
+    this.receivePosts().subscribe((posts) => this.postStream.next(posts));
   }
 }

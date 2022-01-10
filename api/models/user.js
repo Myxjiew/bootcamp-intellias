@@ -21,19 +21,19 @@ const userSchema = Schema(
     },
     likedComments: [
       {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Comment",
       },
     ],
     likedPosts: [
       {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Post",
       },
     ],
     comments: [
       {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Comment",
       },
     ],

@@ -41,10 +41,7 @@ async function getPost(id) {
 
 async function addPost(data) {
   try {
-    await Post.create(data);
-    return {
-      status: 200,
-    };
+    return Post.create(data);
   } catch (error) {
     console.log(error);
   }
