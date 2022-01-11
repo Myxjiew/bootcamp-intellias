@@ -1,6 +1,12 @@
 <main class="layout">
-  <app-post-list class="layout__blog-list"></app-post-list>
-  <div class="layout__aside">
+  <div *ngIf="!toggle"
+       class="container">
+    <app-spinner></app-spinner>
+  </div>
+  <app-post-list class="layout__blog-list"
+                 *ngIf="toggle"></app-post-list>
+  <div class="layout__aside"
+       *ngIf="toggle">
     <app-aside-tags></app-aside-tags>
   </div>
 </main>

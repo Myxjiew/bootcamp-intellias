@@ -11,6 +11,7 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { RouterModule } from '@angular/router';
 import { SpinnerModule } from '@shared/components/spinner/spinner.module';
 import { TagComponent } from './components/tag/tag.component';
+import { AddTagComponent } from './components/add-tag/add-tag.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TagComponent } from './components/tag/tag.component';
     LayoutComponent,
     PostListComponent,
     TagComponent,
+    AddTagComponent,
   ],
   imports: [
     CommonModule,

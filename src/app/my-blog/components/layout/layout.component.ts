@@ -7,8 +7,14 @@ import { BlogService } from '@shared/services/blog.service';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
+  public toggle = false;
+
   public constructor(private readonly blogService: BlogService) {}
+
   ngOnInit() {
     this.blogService.feedPosts();
+    setTimeout(() => {
+      this.toggle = true;
+    }, 1000);
   }
 }

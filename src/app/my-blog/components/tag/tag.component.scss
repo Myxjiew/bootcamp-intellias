@@ -1,12 +1,16 @@
 @import "../../../../styles/variables";
 
 .tag {
+  display: flex;
+  flex-wrap: wrap;
+
   &__pill {
     border: 0.5px solid $border-grey;
     background-color: $grey-pill;
     border-radius: 25%;
     text-align: center;
     max-width: max-content;
+    margin: 2px;
 
     &:active {
       background-color: $grey-pill-hover;

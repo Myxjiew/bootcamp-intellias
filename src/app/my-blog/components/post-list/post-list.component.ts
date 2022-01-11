@@ -10,16 +10,11 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class PostListComponent implements OnInit, OnDestroy {
   public posts: Post[] = [];
-  public toggle = false;
   private destroyStream = new Subject<void>();
 
   public constructor(private readonly blogService: BlogService) {}
 
   public ngOnInit(): void {
-    setTimeout(() => {
-      this.toggle = true;
-    }, 1000);
-
     this.blogService
       .getPosts()
       .pipe(takeUntil(this.destroyStream))
