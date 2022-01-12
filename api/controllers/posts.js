@@ -1,6 +1,6 @@
 const { Post } = require("../models/post.js");
-const { Comment } = require("../models/comment.js");
 const { User } = require("../models/user.js");
+const { updatePost, removePost, addPost } = require("../services/posts");
 
 async function getPosts() {
   try {
@@ -39,32 +39,32 @@ async function getPost(id) {
   }
 }
 
-async function addPost(data) {
+async function postPost(req, res) {
   try {
-    return Post.create(data);
+    const data = req.body;
+    const result = await addPost(data);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function removePost(id) {
+async function deletePost(req, res) {
   try {
-    await Post.deleteOne({ _id: id });
-    await Comment.find({ post: id }).deleteOne({});
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const result = await removePost(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function updatePost(id, data) {
+async function patchPost(req, res) {
   try {
-    await Post.findOneAndUpdate(id, data);
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const data = req.body;
+    const result = await updatePost(id, data);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
@@ -73,7 +73,7 @@ async function updatePost(id, data) {
 module.exports = {
   getPosts,
   getPost,
-  addPost,
-  removePost,
-  updatePost,
+  postPost,
+  deletePost,
+  patchPost,
 };

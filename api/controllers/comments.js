@@ -1,72 +1,56 @@
-const mongoose = require("mongoose");
-const { Post } = require("../models/post.js");
-const { Comment } = require("../models/comment.js");
+const {
+  getAllComments,
+  getOneComment,
+  updateComment,
+  addComment,
+  removeComment,
+} = require("../services/comments");
 
-async function getComments() {
+async function getComments(req, res) {
   try {
-    return Comment.find({});
+    const result = await getAllComments();
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function getComment(id) {
+async function getComment(req, res) {
   try {
-    return Comment.findOne({ _id: id });
+    const id = req.params.id;
+    const result = await getOneComment(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function addComment(data) {
+async function postComment(req, res) {
   try {
-    const comment = new Comment({
-      author: new mongoose.Types.ObjectId(data.userId),
-      post: new mongoose.Types.ObjectId(data.postId),
-      text: data.text,
-    });
-
-    await Post.updateOne(
-      { _id: comment.post },
-      { $push: { comments: comment._id } }
-    );
-
-    return {
-      status: 200,
-    };
+    const data = req.body;
+    const result = await addComment(data);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function updateComment(id, data) {
+async function patchComment(req, res) {
   try {
-    await Comment.findOneAndUpdate(id, data);
-
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const data = req.body;
+    const result = await updateComment(id, data);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function removeComment(id) {
+async function deleteComment(req, res) {
   try {
-    const comment = await Comment.findOne({
-      _id: new mongoose.Types.ObjectId(id),
-    });
-
-    await Post.updateOne(
-      { _id: comment.post },
-      { $pull: { comments: comment._id } }
-    );
-
-    await Comment.deleteOne({ _id: comment._id });
-
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const result = await removeComment(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
@@ -75,7 +59,7 @@ async function removeComment(id) {
 module.exports = {
   getComments,
   getComment,
-  addComment,
-  updateComment,
-  removeComment,
+  postComment,
+  patchComment,
+  deleteComment,
 };

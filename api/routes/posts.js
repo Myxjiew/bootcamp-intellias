@@ -4,9 +4,9 @@ const router = express.Router();
 const {
   getPosts,
   getPost,
-  addPost,
-  removePost,
-  updatePost,
+  postPost,
+  deletePost,
+  patchPost,
 } = require("../controllers/posts.js");
 
 router.get("/", async (req, res) => {
@@ -19,19 +19,8 @@ router.get("/:id", async (req, res) => {
   res.send(result);
 });
 
-router.post("/", async (req, res) => {
-  const result = await addPost(req.body);
-  res.send(result);
-});
-
-router.patch("/:id", async (req, res) => {
-  const result = await updatePost(req.params.id, req.body);
-  res.send(result);
-});
-
-router.delete("/:id", async (req, res) => {
-  const result = await removePost(req.params.id);
-  res.send(result);
-});
+router.post("/", postPost);
+router.patch("/:id", patchPost);
+router.delete("/:id", deletePost);
 
 module.exports = router;
