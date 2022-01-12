@@ -40,7 +40,6 @@ export class BlogService {
         );
       } else {
         this.postStream.next([...this.postStream.getValue(), post]);
-        console.log(this.postStream.getValue());
       }
     }
   }

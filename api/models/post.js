@@ -37,7 +37,6 @@ const postSchema = Schema(
     tags: [
       {
         type: String,
-        required: true,
       },
     ],
   },

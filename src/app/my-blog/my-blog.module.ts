@@ -7,11 +7,11 @@ import { BlogItemComponent } from './components/blog-item/blog-item.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { RouterModule } from '@angular/router';
 import { SpinnerModule } from '@shared/components/spinner/spinner.module';
-import { TagComponent } from './components/tag/tag.component';
-import { AddTagComponent } from './components/add-tag/add-tag.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +19,6 @@ import { AddTagComponent } from './components/add-tag/add-tag.component';
     BlogItemComponent,
     LayoutComponent,
     PostListComponent,
-    TagComponent,
-    AddTagComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +26,8 @@ import { AddTagComponent } from './components/add-tag/add-tag.component';
     BlogHandlerModule,
     MatIconModule,
     MatRippleModule,
+    MatChipsModule,
+    MatFormFieldModule,
     RouterModule,
     SpinnerModule,
   ],

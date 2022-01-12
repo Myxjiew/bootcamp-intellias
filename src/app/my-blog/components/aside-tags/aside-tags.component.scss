@@ -3,6 +3,10 @@
   background: $grey;
   padding: 8px;
 
+  &__list {
+    width: 100%;
+  }
+
   &__label {
     margin-bottom: 12px;
   }

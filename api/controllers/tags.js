@@ -20,11 +20,9 @@ async function addTag(data) {
   try {
     const tag = new Tag({
       tagName: data.tagName,
-      post: req.body.posts || [],
+      posts: [],
     });
-    return {
-      status: 200,
-    };
+    return Tag.create(tag);
   } catch (error) {
     console.log(error);
   }
