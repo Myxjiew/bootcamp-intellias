@@ -1,5 +1,4 @@
 const { getAll, getOne, update, remove, add } = require("../repository/tag");
-const { Tag } = require("../models/tag");
 
 async function getAllTags() {
   return getAll();
@@ -14,11 +13,7 @@ async function removeTag(id) {
   return remove(id);
 }
 async function addTag(data) {
-  const tag = new Tag({
-    tagName: data.tagName,
-    posts: [],
-  });
-  return add(tag);
+  return add(data);
 }
 
 module.exports = {

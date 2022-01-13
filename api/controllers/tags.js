@@ -5,7 +5,6 @@ const {
   addTag,
   removeTag,
 } = require("../services/tags");
-const { Tag } = require("../models/tag.js");
 
 async function getTags(req, res) {
   try {
@@ -19,7 +18,7 @@ async function getTags(req, res) {
 async function getTag(req, res) {
   try {
     const id = req.params.id;
-    const result = await getOneTag();
+    const result = await getOneTag(id);
     res.send(result);
   } catch (error) {
     console.log(error);

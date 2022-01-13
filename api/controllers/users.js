@@ -1,56 +1,56 @@
-const { User } = require("../models/user.js");
-const { Comment } = require("../models/comment.js");
-const mongoose = require("mongoose");
-const session = mongoose.startSession();
+const {
+  getAllUsers,
+  getOneUser,
+  updateUser,
+  addUser,
+  removeUser,
+} = require("../services/users");
 
-async function getUsers() {
+async function getUsers(req, res) {
   try {
-    return User.find({});
+    const result = await getAllUsers();
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function getUser(id) {
+async function getUser(req, res) {
   try {
-    return User.findOne({ _id: id });
+    const id = req.params.id;
+    const result = await getOneUser(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function addUser(dataUser) {
+async function postUser(req, res) {
   try {
-    await User.create(dataUser);
-    return {
-      status: 200,
-    };
+    const data = req.body;
+    const result = await addUser(data);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function updateUser(id, dataUser) {
+async function patchUser(req, res) {
   try {
-    await User.findOneAndUpdate(id, dataUser);
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const data = req.body;
+    const result = await updateUser(id, data);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function removeUser(id) {
+async function deleteUser(req, res) {
   try {
-    await session.withTransaction(async () => {
-      await User.deleteOne({ _id: id });
-      await Comment.find({ post: id }).deleteOne({});
-    });
-    await session.abortTransaction();
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const result = await removeUser(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
@@ -59,7 +59,7 @@ async function removeUser(id) {
 module.exports = {
   getUsers,
   getUser,
-  addUser,
-  updateUser,
-  removeUser,
+  postUser,
+  patchUser,
+  deleteUser,
 };

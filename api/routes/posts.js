@@ -9,16 +9,8 @@ const {
   patchPost,
 } = require("../controllers/posts.js");
 
-router.get("/", async (req, res) => {
-  const result = await getPosts();
-  res.send(result);
-});
-
-router.get("/:id", async (req, res) => {
-  const result = await getPost(req.params.id);
-  res.send(result);
-});
-
+router.get("/", getPosts);
+router.get("/:id", getPost);
 router.post("/", postPost);
 router.patch("/:id", patchPost);
 router.delete("/:id", deletePost);
