@@ -4,7 +4,7 @@
                     appearance="fill">
         <mat-label>Tag list</mat-label>
         <mat-chip-list #chipList
-                       aria-label="Fruit selection">
+                       aria-label="Tags">
             <mat-chip *ngFor="let tag of tags"
                       (removed)="removeTag(tag)">
                 {{tag.tagName}}

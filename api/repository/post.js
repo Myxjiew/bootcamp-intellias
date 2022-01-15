@@ -1,11 +1,24 @@
 const { Post } = require("../models/post");
+const { User } = require("../models/user");
 
 async function getAll() {
-  return Post.find({}).lean();
+  const res = await Post.find({}).populate("tags", "tagName -_id").populate({
+    path: "author",
+    model: User,
+    select: "firstName lastName -_id",
+  });
+  return res;
 }
 
 async function getOne(id) {
-  return Post.findOne({ _id: id }).lean();
+  const res = await Post.find({ _id: id })
+    .populate("tags", "tagName -_id")
+    .populate({
+      path: "author",
+      model: User,
+      select: "firstName lastName -_id",
+    });
+  return res[0];
 }
 
 async function update(id, data) {

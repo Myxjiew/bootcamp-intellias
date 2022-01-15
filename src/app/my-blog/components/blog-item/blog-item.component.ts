@@ -12,7 +12,7 @@ import { RADIUS, COLOR } from 'src/app/constants/post.constants';
 export class BlogItemComponent {
   @Input() public post!: Post;
 
-  constructor(private blogService: BlogService) {}
+  public constructor(private blogService: BlogService) {}
 
   public radius = RADIUS;
   public color = COLOR;

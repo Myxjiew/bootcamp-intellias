@@ -2,13 +2,13 @@ const {
   updatePost,
   removePost,
   addPost,
-  getAllPostsWithAuthor,
-  getOnePostWithAuthor,
+  getAllPosts,
+  getOnePost,
 } = require("../services/posts");
 
 async function getPosts(req, res) {
   try {
-    const result = await getAllPostsWithAuthor();
+    const result = await getAllPosts();
     res.send(result);
   } catch (error) {
     console.log(error);
@@ -18,7 +18,7 @@ async function getPosts(req, res) {
 async function getPost(req, res) {
   try {
     const id = req.params.id;
-    const result = await getOnePostWithAuthor(id);
+    const result = await getOnePost(id);
     res.send(result);
   } catch (error) {
     console.log(error);

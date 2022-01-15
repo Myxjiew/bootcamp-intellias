@@ -36,7 +36,8 @@ const postSchema = Schema(
 
     tags: [
       {
-        type: String,
+        type: mongoose.Types.ObjectId,
+        ref: "Tag",
       },
     ],
   },
