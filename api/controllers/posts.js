@@ -7,8 +7,9 @@ const {
 } = require("../services/posts");
 
 async function getPosts(req, res) {
+  const { tags } = req.query;
   try {
-    const result = await getAllPosts();
+    const result = await getAllPosts(tags);
     res.send(result);
   } catch (error) {
     console.log(error);

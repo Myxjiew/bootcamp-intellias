@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '@shared/services/blog.service';
 import { TagService } from '@shared/services/tag.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -12,11 +13,13 @@ export class LayoutComponent implements OnInit {
 
   public constructor(
     private readonly blogService: BlogService,
-    private readonly tagService: TagService
+    private readonly tagService: TagService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.blogService.feedPosts();
+    const temp = this.activatedRoute.snapshot.queryParamMap.get('tag');
+    this.blogService.feedPosts(temp || '');
     this.tagService.feedTags();
     setTimeout(() => {
       this.toggle = true;

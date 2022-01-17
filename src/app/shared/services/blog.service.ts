@@ -12,8 +12,9 @@ export class BlogService {
   private postStream = new BehaviorSubject<Post[]>(postsMock);
   constructor(private readonly http: HttpClient) {}
 
-  public receivePosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('/api/posts');
+  public receivePosts(query = ''): Observable<Post[]> {
+    const reqURL = query ? `?tags=${query}` : '';
+    return this.http.get<Post[]>(`/api/posts${reqURL}`);
   }
 
   public receivePost(id: string): Observable<Post> {
@@ -48,7 +49,7 @@ export class BlogService {
     return this.postStream.asObservable();
   }
 
-  public feedPosts(): void {
-    this.receivePosts().subscribe((posts) => this.postStream.next(posts));
+  public feedPosts(query = ''): void {
+    this.receivePosts(query).subscribe((posts) => this.postStream.next(posts));
   }
 }

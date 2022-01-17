@@ -4,6 +4,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Tag } from '@shared/interfaces/tag.interface';
 import { TagService } from '@shared/services/tag.service';
 import { Subject, takeUntil } from 'rxjs';
+import { BlogService } from '@shared/services/blog.service';
 
 @Component({
   selector: 'app-aside-tags',
@@ -14,7 +15,10 @@ export class AsideTagsComponent implements OnInit, OnDestroy {
   public readonly separatorKeysCodes = [ENTER, COMMA] as const;
   private destroyStream = new Subject<void>();
 
-  public constructor(private readonly tagService: TagService) {}
+  public constructor(
+    private readonly tagService: TagService,
+    private readonly blogService: BlogService
+  ) {}
 
   public addOnBlur = true;
   public tags: Tag[] = [];
@@ -29,6 +33,10 @@ export class AsideTagsComponent implements OnInit, OnDestroy {
         .subscribe((data) => this.tagService.updateStream(data));
     }
     event.chipInput!.clear();
+  }
+
+  public filterByTag(query: string = ''): void {
+    this.blogService.feedPosts(query);
   }
 
   public removeTag(tag: Tag): void {

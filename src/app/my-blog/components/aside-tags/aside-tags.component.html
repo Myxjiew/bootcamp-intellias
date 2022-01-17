@@ -6,7 +6,10 @@
         <mat-chip-list #chipList
                        aria-label="Tags">
             <mat-chip *ngFor="let tag of tags"
-                      (removed)="removeTag(tag)">
+                      (click)="filterByTag(tag.tagName)"
+                      (removed)="removeTag(tag)"
+                      routerLink=""
+                      [queryParams]="{ tag: tag.tagName }">
                 {{tag.tagName}}
                 <button matChipRemove>
                     <mat-icon>cancel</mat-icon>

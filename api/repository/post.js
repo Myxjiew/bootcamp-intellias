@@ -1,24 +1,38 @@
 const { Post } = require("../models/post");
 const { User } = require("../models/user");
 
-async function getAll() {
-  const res = await Post.find({}).populate("tags", "tagName -_id").populate({
-    path: "author",
-    model: User,
-    select: "firstName lastName -_id",
-  });
-  return res;
+async function getAll(queryTags) {
+  if (queryTags) {
+    return Post.aggregate([
+      {
+        $lookup: {
+          from: "tags",
+          localField: "tags",
+          foreignField: "_id",
+          as: "tags",
+        },
+      },
+      {
+        $match: {
+          "tags.tagName": queryTags,
+        },
+      },
+    ]);
+  } else {
+    return Post.find({}).populate("tags", "tagName -_id").populate({
+      path: "author",
+      model: User,
+      select: "firstName lastName",
+    });
+  }
 }
 
 async function getOne(id) {
-  const res = await Post.find({ _id: id })
-    .populate("tags", "tagName -_id")
-    .populate({
-      path: "author",
-      model: User,
-      select: "firstName lastName -_id",
-    });
-  return res[0];
+  return Post.findOne({ _id: id }).populate("tags", "tagName -_id").populate({
+    path: "author",
+    model: User,
+    select: "firstName lastName",
+  });
 }
 
 async function update(id, data) {

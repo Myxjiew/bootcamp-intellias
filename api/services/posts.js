@@ -1,7 +1,7 @@
 const { getAll, getOne, update, remove, add } = require("../repository/post");
 
-async function getAllPosts() {
-  return getAll();
+async function getAllPosts(queryTags) {
+  return getAll(queryTags);
 }
 
 async function getOnePost(id) {
