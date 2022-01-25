@@ -1,56 +1,65 @@
-const { User } = require("../models/user.js");
-const { Comment } = require("../models/comment.js");
-const mongoose = require("mongoose");
-const session = mongoose.startSession();
+const {
+  getAllUsers,
+  getOneUser,
+  updateUser,
+  addUser,
+  removeUser,
+} = require("../services/users");
 
-async function getAllUsers() {
+async function getUsers(req, res) {
   try {
-    return User.find({});
+    const result = await getAllUsers();
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function addUser(dataUser) {
+async function getUser(req, res) {
   try {
-    await User.create(dataUser);
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const result = await getOneUser(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function updateUser(id, dataUser) {
+async function postUser(req, res) {
   try {
-    await User.findOneAndUpdate(id, dataUser);
-    return {
-      status: 200,
-    };
+    const data = req.body;
+    const result = await addUser(data);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function removeUser(id) {
+async function patchUser(req, res) {
   try {
-    await session.withTransaction(async () => {
-      await User.remove({ _id: id });
-      await Comment.find({ post: id }).remove({});
-    });
-    await session.abortTransaction();
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const data = req.body;
+    const result = await updateUser(id, data);
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function deleteUser(req, res) {
+  try {
+    const id = req.params.id;
+    const result = await removeUser(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
 module.exports = {
-  getAllUsers,
-  addUser,
-  updateUser,
-  removeUser,
+  getUsers,
+  getUser,
+  postUser,
+  patchUser,
+  deleteUser,
 };

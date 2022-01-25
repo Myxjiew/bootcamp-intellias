@@ -1,4 +1,22 @@
 <div class="aside">
     <p class="aside__label"> Popular Tags </p>
-    <p class="aside__text"> No tags are here... yet. </p>
+    <mat-form-field class="aside__list"
+                    appearance="fill">
+        <mat-label>Tag list</mat-label>
+        <mat-chip-list #chipList
+                       aria-label="Fruit selection">
+            <mat-chip *ngFor="let tag of tags"
+                      (removed)="removeTag(tag)">
+                {{tag.tagName}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+            <input placeholder="New tag..."
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="addTag($event)">
+        </mat-chip-list>
+    </mat-form-field>
 </div>

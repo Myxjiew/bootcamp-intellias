@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IPost } from '@shared/interfaces/blog-item.interface';
+import { Post } from '@shared/interfaces/blog-item.interface';
 import { BlogService } from '@shared/services/blog.service';
 import { RADIUS, COLOR } from 'src/app/constants/post.constants';
 
@@ -10,7 +10,7 @@ import { RADIUS, COLOR } from 'src/app/constants/post.constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogItemComponent {
-  @Input() public post!: IPost;
+  @Input() public post!: Post;
 
   constructor(private blogService: BlogService) {}
 
@@ -19,15 +19,14 @@ export class BlogItemComponent {
 
   public readonly mockedText = 'Read more...';
 
-  public handleClick(post: IPost): void {
+  public handleClick(post: Post): void {
     post.toggle = !post.toggle;
     post.toggle ? post.likes++ : post.likes--;
   }
 
-  public deleteCurrentPost(): void {
+  public deleteCurrentPost(post: Post): void {
     this.blogService
-      .deletePost(this.post._id)
-      .subscribe((data) => this.blogService.publishPost(data));
-    window.location.reload();
+      .deletePost(post._id)
+      .subscribe((data) => this.blogService.updateStream(post, 'remove'));
   }
 }

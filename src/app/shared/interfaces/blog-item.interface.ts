@@ -1,4 +1,4 @@
-export interface IPost {
+export interface Post {
   _id: string;
   firstName?: string;
   lastName?: string;

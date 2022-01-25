@@ -1,73 +1,56 @@
-const { Post } = require("../models/post.js");
-const { Comment } = require("../models/comment.js");
-const { User } = require("../models/user.js");
+const {
+  updatePost,
+  removePost,
+  addPost,
+  getAllPostsWithAuthor,
+  getOnePostWithAuthor,
+} = require("../services/posts");
 
-async function getPosts() {
+async function getPosts(req, res) {
   try {
-    const posts = await Post.find({}).lean();
-    const userIds = posts.map((el) => el.author);
-    const users = await User.find({ _id: { $in: userIds } }).lean();
-    const result = posts.map((el) => {
-      const user = users.find((item) => item._id.valueOf() === el.author);
-      if (user) {
-        return { ...el, firstName: user.firstName, lastName: user.lastName };
-      } else {
-        return el;
-      }
-    });
-    return result;
+    const result = await getAllPostsWithAuthor();
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function getPost(id) {
+async function getPost(req, res) {
   try {
-    const post = await Post.findOne({ _id: id }).lean();
-    if (post) {
-      const user = await User.findOne({ _id: post.author });
-      if (user) {
-        return {
-          ...post,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        };
-      }
-    }
+    const id = req.params.id;
+    const result = await getOnePostWithAuthor(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function addPost(data) {
+async function postPost(req, res) {
   try {
-    await Post.create(data);
-    return {
-      status: 200,
-    };
+    const data = req.body;
+    const result = await addPost(data);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function removePost(id) {
+async function deletePost(req, res) {
   try {
-    await Post.deleteOne({ _id: id });
-    await Comment.find({ post: id }).deleteOne({});
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const result = await removePost(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function updatePost(id, data) {
+async function patchPost(req, res) {
   try {
-    await Post.findOneAndUpdate(id, data);
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const data = req.body;
+    const result = await updatePost(id, data);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
@@ -76,7 +59,7 @@ async function updatePost(id, data) {
 module.exports = {
   getPosts,
   getPost,
-  addPost,
-  removePost,
-  updatePost,
+  postPost,
+  deletePost,
+  patchPost,
 };

@@ -7,6 +7,8 @@ import { BlogItemComponent } from './components/blog-item/blog-item.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { RouterModule } from '@angular/router';
 import { SpinnerModule } from '@shared/components/spinner/spinner.module';
@@ -24,6 +26,8 @@ import { SpinnerModule } from '@shared/components/spinner/spinner.module';
     BlogHandlerModule,
     MatIconModule,
     MatRippleModule,
+    MatChipsModule,
+    MatFormFieldModule,
     RouterModule,
     SpinnerModule,
   ],

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IPost } from '@shared/interfaces/blog-item.interface';
+import { Post } from '@shared/interfaces/blog-item.interface';
 import { BlogService } from '@shared/services/blog.service';
 import { COLOR, RADIUS } from 'src/app/constants/post.constants';
 
@@ -10,7 +10,7 @@ import { COLOR, RADIUS } from 'src/app/constants/post.constants';
   styleUrls: ['./post-page.component.scss'],
 })
 export class PostPageComponent implements OnInit {
-  public post!: IPost;
+  public post!: Post;
   public radius = RADIUS;
   public color = COLOR;
   public toggle = false;
@@ -21,7 +21,7 @@ export class PostPageComponent implements OnInit {
     private readonly router: Router
   ) {}
 
-  public handleClick(post: IPost): void {
+  public handleClick(post: Post): void {
     post.toggle = !post.toggle;
     post.toggle ? post.likes++ : post.likes--;
   }

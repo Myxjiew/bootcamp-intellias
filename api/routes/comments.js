@@ -2,30 +2,17 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getAllComments,
-  addComment,
-  removeComment,
-  updateComment,
+  getComments,
+  getComment,
+  postComment,
+  deleteComment,
+  patchComment,
 } = require("../controllers/comments.js");
 
-router.get("/", async (req, res) => {
-  const result = await getAllComments();
-  res.send(result);
-});
-
-router.post("/", async (req, res) => {
-  const result = await addComment(req.body);
-  res.send(result);
-});
-
-router.patch("/:id", async (req, res) => {
-  const result = await updateComment(req.params.id, req.body);
-  res.send(result);
-});
-
-router.delete("/:id", async (req, res) => {
-  const result = await removeComment(req.params.id);
-  res.send(result);
-});
+router.get("/", getComments);
+router.get("/:id", getComment);
+router.post("/", postComment);
+router.patch("/:id", patchComment);
+router.delete("/:id", deleteComment);
 
 module.exports = router;

@@ -1,40 +1,65 @@
-const { Tag } = require("../models/tag.js");
+const {
+  getAllTags,
+  getOneTag,
+  updateTag,
+  addTag,
+  removeTag,
+} = require("../services/tags");
 
-async function getAllTags() {
+async function getTags(req, res) {
   try {
-    return Tag.find({});
+    const result = await getAllTags();
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function addTag(data) {
+async function getTag(req, res) {
   try {
-    const tag = new Tag({
-      tagName: data.tagName,
-      post: req.body.posts || [],
-    });
-    return {
-      status: 200,
-    };
+    const id = req.params.id;
+    const result = await getOneTag(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function removeTag(id) {
+async function postTag(req, res) {
   try {
-    await Tag.remove({ _id: Tag._id });
-    return {
-      status: 200,
-    };
+    const data = req.body;
+    const result = await addTag(data);
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function patchTag(req, res) {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const result = await updateTag(id, data);
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function deleteTag(req, res) {
+  try {
+    const id = req.params.id;
+    const result = await removeTag(id);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 }
 
 module.exports = {
-  getAllTags,
-  addTag,
-  removeTag,
+  getTags,
+  getTag,
+  postTag,
+  patchTag,
+  deleteTag,
 };

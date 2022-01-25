@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IPost } from '@shared/interfaces/blog-item.interface';
+import { Post } from '@shared/interfaces/blog-item.interface';
 import { BlogService } from '@shared/services/blog.service';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -9,19 +9,14 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./post-list.component.scss'],
 })
 export class PostListComponent implements OnInit, OnDestroy {
-  public posts: IPost[] = [];
-  public toggle = false;
+  public posts: Post[] = [];
   private destroyStream = new Subject<void>();
 
   public constructor(private readonly blogService: BlogService) {}
 
   public ngOnInit(): void {
-    setTimeout(() => {
-      this.toggle = true;
-    }, 1000);
-
     this.blogService
-      .receivePosts()
+      .getPosts()
       .pipe(takeUntil(this.destroyStream))
       .subscribe((res) => {
         this.posts = res;

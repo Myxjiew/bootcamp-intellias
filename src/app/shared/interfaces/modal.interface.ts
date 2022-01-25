@@ -1,5 +1,4 @@
-export interface IModal {
-    author: string;
-    title: string;
-    content: string;
+export interface Modal {
+  title: string;
+  content: string;
 }
