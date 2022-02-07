@@ -8,6 +8,20 @@ async function getOnePost(id) {
   return getOne(id);
 }
 
+async function getOnePostWithAuthor(id) {
+  const post = await getOne(id);
+  if (post) {
+    const user = await getOneAuthor(post);
+    if (user) {
+      return {
+        ...post,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      };
+    }
+  }
+}
+
 async function updatePost(id, data) {
   return update(id, data);
 }
