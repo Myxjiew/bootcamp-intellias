@@ -4,7 +4,7 @@
         <div class="post__user">
             <mat-icon class="post__user-picture">mood</mat-icon>
             <div class="post__author-info">
-                <div class="post__author">{{ post?.firstName }} {{ post?.lastName }}</div>
+                <div class="post__author">{{ post?.author?.firstName }} {{ post?.author?.lastName }}</div>
                 <div class="post__date">{{ post?.date | date: "mediumDate" }}</div>
             </div>
         </div>

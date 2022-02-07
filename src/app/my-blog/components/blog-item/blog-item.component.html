@@ -5,7 +5,7 @@
       <div class="post__user">
         <mat-icon class="post__user-picture">mood</mat-icon>
         <div class="post__user-info">
-          <div class="post__author">{{ post?.firstName }} {{ post?.lastName }}</div>
+          <div class="post__author">{{ post?.author?.firstName }} {{ post?.author?.lastName }}</div>
           <div class="post__date">{{ post?.date | date: "mediumDate" }}</div>
         </div>
       </div>
@@ -19,8 +19,10 @@
         <mat-icon [color]="post?.toggle ? 'accent' : 'warn'">favorite</mat-icon>
         <p class="post__counter">{{ post?.likes }}</p>
       </div>
-
     </div>
+    <mat-chip-list aria-label="Tags">
+      <mat-chip *ngFor='let tag of post?.tags'>{{ tag?.tagName }}</mat-chip>
+    </mat-chip-list>
 
     <div class="post__title">{{ post?.title }}</div>
 
@@ -37,11 +39,6 @@
           <mat-icon>delete</mat-icon>
         </div>
       </div>
-
     </div>
-    <div class="post__tags">
-
-    </div>
-
   </div>
 </article>

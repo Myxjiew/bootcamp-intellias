@@ -1,23 +1,7 @@
 const { getAll, getOne, update, remove, add } = require("../repository/post");
-const { getAllWithinArray, getOneAuthor } = require("../repository/user");
 
-async function getAllPosts() {
-  return getAll();
-}
-
-async function getAllPostsWithAuthor() {
-  const posts = await getAll();
-  const userIds = posts.map((el) => el.author);
-  const users = await getAllWithinArray(userIds);
-  const result = posts.map((el) => {
-    const user = users.find((item) => item._id.valueOf() === el.author);
-    if (user) {
-      return { ...el, firstName: user.firstName, lastName: user.lastName };
-    } else {
-      return el;
-    }
-  });
-  return result;
+async function getAllPosts(queryTags) {
+  return getAll(queryTags);
 }
 
 async function getOnePost(id) {
@@ -52,9 +36,7 @@ async function addPost(data) {
 
 module.exports = {
   getAllPosts,
-  getAllPostsWithAuthor,
   getOnePost,
-  getOnePostWithAuthor,
   updatePost,
   removePost,
   addPost,

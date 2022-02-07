@@ -20,19 +20,9 @@ async function update(id, data) {
   return User.findOneAndUpdate(id, data);
 }
 
-async function getAllWithinArray(userIds) {
-  return User.find({ _id: { $in: userIds } }).lean();
-}
-
-async function getOneAuthor(post) {
-  return User.findOne({ _id: post.author });
-}
-
 module.exports = {
   getAll,
-  getAllWithinArray,
   getOne,
-  getOneAuthor,
   remove,
   add,
   update,

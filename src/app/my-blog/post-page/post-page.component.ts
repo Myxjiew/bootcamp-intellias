@@ -38,6 +38,7 @@ export class PostPageComponent implements OnInit {
       } else {
         this.post = post;
       }
+      console.log(this.post);
     });
   }
 }
